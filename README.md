@@ -37,10 +37,11 @@ pip install psycopg2 cryptography uuid
 ### 2. **Set Up PostgreSQL**
 Ensure you have a PostgreSQL database named tokenization and create the following table schema:
 
-```bash
+```sql
 CREATE TABLE sensitive_data (
-    token VARCHAR(255) PRIMARY KEY,
-    encrypted_data BYTEA
+    id SERIAL PRIMARY KEY,
+    token VARCHAR(255) UNIQUE NOT NULL,
+    encrypted_data BYTEA NOT NULL
 );
 ````
 ### 3. **Download the Script**
@@ -62,19 +63,39 @@ This will present you with the following options:
 - Exit: Exit the program.
 
 ## 💻 **Example Usage**
-Storing Data:
+**Storing Data:**
 
 ```bash
-Enter the sensitive data to tokenize: MySuperSecretPassword123
-Data successfully stored! Use this token to retrieve your data: 4fd4bc...
+Options:
+1. Store Sensitive Data
+2. Retrieve Data with Token
+3. Exit
+Select an option (1/2/3): 1
+Enter the Sensitive Data to tokenize: MySecretPassword123
+Data successfully stored! Use this token to retrieve your data: 4fd4bc7acb8247a5ab6d4e0a95b548e7
 ```
-Retrieving Data:
+**Retrieving Data:**
 
 ```bash
-Enter the token to retrieve the original data: 4fd4bc...
-Retrieved Data: MySuperSecretPassword123
+Options:
+1. Store Sensitive Data
+2. Retrieve Data with Token
+3. Exit
+Select an option (1/2/3): 2
+Enter the token to retrieve the original data: 4fd4bc7acb8247a5ab6d4e0a95b548e7
+Retrieved Data: MySecretPassword123
+```
+**Retrieving Data:**
+
+```bash
+Options:
+1. Store Sensitive Data
+2. Retrieve Data with Token
+3. Exit
+Select an option (1/2/3): 3
+Exiting...
 ```
 ## 🔒 **Security Considerations**
-- Data Encryption: Sensitive data is encrypted using Fernet symmetric encryption to ensure that the data is not stored in plaintext.
+- **Data Encryption:** Sensitive data is encrypted using **Fernet Symmetric Encryption** to ensure that the data is not stored in plaintext.
 
-- Tokenization: Tokens are used to reference sensitive data, eliminating the risk of plaintext exposure in the database. The actual sensitive data is only accessible through the token, which is required for decryption.
+- **Tokenization:** Tokens are used to reference sensitive data, eliminating the risk of plaintext exposure in the database. The actual sensitive data is only accessible through the token, which is required for decryption.

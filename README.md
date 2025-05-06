@@ -32,7 +32,7 @@ The **Tokenized Data Access System** securely stores and retrieves sensitive dat
 Make sure Python is installed. Then, install the necessary libraries:
 
 ```bash
-pip install psycopg2 cryptography
+pip install psycopg2 cryptography uuid
 ```
 ### 2. **Set Up PostgreSQL**
 Ensure you have a PostgreSQL database named tokenization and create the following table schema:
